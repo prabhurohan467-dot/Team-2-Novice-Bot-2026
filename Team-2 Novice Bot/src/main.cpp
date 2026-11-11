@@ -1,4 +1,7 @@
 #include "main.h"
+#include "pros/misc.h"
+#include "objects.hpp"
+#include "pros/rtos.hpp"
 
 void on_center_button() {
 	static bool pressed = false;
@@ -26,5 +29,19 @@ void competition_initialize() {}
 
 void autonomous() {}
 
-void opcontrol() {
+void opcontrol(
+
+	
+) { 
+
+	while (true) { 
+		int throttle = controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);
+		int direction = controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X);
+		int left = throttle + direction;
+		int right = throttle - direction;
+		leftmotors.move(left);
+		rightmotors.move(right);
+		pros::delay (2);
+	}
 }
+
