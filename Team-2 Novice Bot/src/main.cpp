@@ -29,19 +29,46 @@ void competition_initialize() {}
 
 void autonomous() {}
 
-void opcontrol(
+//Lift Code (currently incomplete)
+bool l1pressed;
+int liftstate; //lift variables for toggle
+void updatelift( ){ 
+if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) { 
+	if(!l1pressed) {
+		l1pressed = true;
+		
+		if(liftstate == 0) {
+			liftstate = 1;
+			lift.move(127);
+		}
+		else if (liftstate == 1) { 
+			liftstate = 0;
+			lift.move(-127);
+		}
+	}
+} 
+else { l1pressed = false;} 
+lift.move(0);
+}
+//end of lift code
 
+void opcontrol(
 	
 ) { 
 
 	while (true) { 
+		//arcade drive controls
 		int throttle = controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);
 		int direction = controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X);
 		int left = throttle + direction;
 		int right = throttle - direction;
 		leftmotors.move(left);
 		rightmotors.move(right);
-		pros::delay (2);
+		pros::delay (10);
+		//lift code called
+		updatelift();
 	}
 }
+
+
 
