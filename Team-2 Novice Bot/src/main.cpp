@@ -1,7 +1,8 @@
 #include "main.h"
 #include "pros/misc.h"
-#include "objects.hpp"
+#include "drivecode/objects.hpp"
 #include "pros/rtos.hpp"
+#include <cstdint>
 
 void on_center_button() {
 	static bool pressed = false;
@@ -32,11 +33,12 @@ void autonomous() {}
 //Lift Code (currently incomplete)
 bool l1pressed;
 int liftstate; //lift variables for toggle
+uint32_t timestamp; //lift needs to be on a timer so it can stop
 void updatelift( ){ 
 if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) { 
 	if(!l1pressed) {
+		timestamp = pros::millis();
 		l1pressed = true;
-		
 		if(liftstate == 0) {
 			liftstate = 1;
 			lift.move(127);
@@ -46,11 +48,14 @@ if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
 			lift.move(-127);
 		}
 	}
+	if (pros::millis() - timestamp >= 500) { lift.move(0);}
 } 
-else { l1pressed = false;} 
-lift.move(0);
+else { l1pressed = false; } 
+
 }
 //end of lift code
+
+
 
 void opcontrol(
 	
