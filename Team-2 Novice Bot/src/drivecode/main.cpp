@@ -87,6 +87,7 @@ void opcontrol(
 					rightmotors.move(0);
 				}
 				else if (drivestate == 1) { 
+					drivestate = 0;
 					leftmotors.move(left);
 					rightmotors.move(right);
 				}
