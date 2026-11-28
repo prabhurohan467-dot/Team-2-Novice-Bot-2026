@@ -63,7 +63,9 @@ void opcontrol(
 	while (true) { 
 		//arcade drive controls
 		int throttle = controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);
+		//throttle is stick going up for pos value and down for neg value
 		int direction = controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X);
+		//direction is stick going right for pos value and left for neg value
 		int left = throttle + direction;
 		int right = throttle - direction;
 		leftmotors.move(left);
