@@ -1,8 +1,7 @@
-#include "lemlib/chassis/chassis.hpp"
+
 #include "pros/misc.h"
 #include "pros/misc.hpp"
-#include "pros/motor_group.hpp"
-#include "pros/motors.hpp"
+#include "objects.hpp"
 pros::MotorGroup leftmotors ({1,2}); //Change ports later
 pros::MotorGroup rightmotors ({3,4});
 pros::Controller controller (pros::E_CONTROLLER_MASTER);
