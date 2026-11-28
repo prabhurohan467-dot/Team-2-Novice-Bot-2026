@@ -33,6 +33,8 @@ void autonomous() {}
 //Lift Code (currently incomplete)
 bool l1pressed = false; //lift variables for toggle
 int liftstate = 0; //lift variables for toggle
+bool l2pressed = false; //drivetrain variables for toggle
+int drivestate = 0; //drivetrain variables for toggle
 
 uint32_t timestamp; //lift needs to be on a timer so it can stop
 void updatelift( ){ 
@@ -61,6 +63,8 @@ void opcontrol(
 ) { 
 
 	while (true) { 
+	
+
 		//arcade drive controls
 		int throttle = controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);
 		//throttle is stick going up for pos value and down for neg value
@@ -70,6 +74,25 @@ void opcontrol(
 		int right = throttle - direction;
 		leftmotors.move(left);
 		rightmotors.move(right);
+
+		/*toggle for different drive train modes
+		this one will just be a test to see if the drive modes work
+		so it will just stop all motors*/
+		if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) { 
+			if(!l2pressed) {
+				l2pressed = true;
+				if(drivestate == 0) {
+					drivestate = 1;
+					leftmotors.move(0);
+					rightmotors.move(0);
+				}
+				else if (drivestate == 1) { 
+					leftmotors.move(left);
+					rightmotors.move(right);
+				}
+			}
+		} 
+		
 		pros::delay (10);
 		//lift code called
 		updatelift();
