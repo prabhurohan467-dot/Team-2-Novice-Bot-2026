@@ -33,7 +33,7 @@ void autonomous() {}
 //Lift Code (currently incomplete)
 bool l1pressed = false; //lift variables for toggle
 int liftstate = 0; //lift variables for toggle
-//I have a feeling that having 2 var is not needed
+
 uint32_t timestamp; //lift needs to be on a timer so it can stop
 void updatelift( ){ 
 if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) { 
