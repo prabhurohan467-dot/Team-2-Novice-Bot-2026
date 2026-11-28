@@ -56,8 +56,6 @@ else { l1pressed = false; }
 }
 //end of lift code
 
-
-
 void opcontrol(
 	
 ) { 
